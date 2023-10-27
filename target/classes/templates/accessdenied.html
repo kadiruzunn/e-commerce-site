@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::section})">
+
+<head>
+	<title>Registration Title</title>
+</head>
+
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<div class="card-header">
+						<h1 class="text-center"> Login </h1>
+					</div>
+					<th:block th:if="${session.msg}">
+						<p class="text-center fs-3" th:text="#{email.var}"></p>
+					<th:block th:text"${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+					<div class="card-body">
+						<p style="color:red">Erişim engellendi yetkisiz erişim.</p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

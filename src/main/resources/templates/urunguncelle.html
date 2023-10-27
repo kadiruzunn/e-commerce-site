@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::section})"> <!--layout(content)-->
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<section>
+		<div class="card m-5">
+			<h5 class="card-header">Ürün Güncelle</h5>
+			<div class="card-body">
+				<form th:action="@{/urunguncelle/{id} (id=${urun.id})}" th:object="${urun}" method="POST" class="form"
+					enctype="multipart/form-data">
+					<!-- form vasıtasıyla sunucu tarafına resim,pdf,excel,word gibi dosyalar upload
+    edilmek isteniyorsa form etiketine enctype="multipart/form-data" eklenmeli-->
+
+					<div class="form-group mb-2">
+						<label th:text="#{label.urun.image}"></label>
+						<img th:src="@{'/img/' + ${urun.image}}" style="width:100px;height: 100px;"/>
+						<input type="file" id="img" name="img" accept="image/png, image/jpeg, image/webp"
+							class="form-control" onchange="document.getElementById('image').value=document.getElementById('img').value" />
+						<input type="hidden" id="image" name="image" th:field="*{image}"/>
+					</div>
+
+					<div class="form-group mb-2">
+						<label>Kategori</label>
+						<select class="form-control" name="category">
+							<option th:each="key:${kategoriler.keySet()}" th:value="${key}" th:selected="(${key} == ${secilenKategori})"
+								th:text="${kategoriler.get(key)}">
+							</option>
+						</select>
+					</div>
+
+					<div class="form-group mb-2">
+						<label>Adı</label>
+						<input type="text" id="name" name="name" th:field="*{name}" class="form-control" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+					</div>
+
+					<div class="form-group mb-2">
+						<label>Miktar</label>
+						<input type="number" id="quantity" name="quantity" th:field="*{quantity}"
+							class="form-control" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('quantity')}"
+							th:errors="*{quantity}"></div>
+					</div>
+
+					<div class="form-group mb-2">
+						<label>Birim Türü</label>
+						<select class="form-control" name="quantitytType" th:field="*{quantitytType}">
+							<option th:each="tip:${T(com.bilgeadam.stok2.entity.QuantityType).values()}"
+								th:value="${tip}" th:text="${tip}">
+							</option>
+						</select>
+					</div>
+
+					<div class="form-group mb-2">
+						<label>Üretim Tarihi</label>
+						<input type="date" id="productionDate" name="productionDate" th:field="*{productionDate}"
+							class="form-control" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('productionDate')}"
+							th:errors="*{productionDate}"></div>
+					</div>
+					
+					<div class="form-group mb-2">
+						<label>Kritik Stok</label>
+						<input type="number" id="criticalStock" name="criticalStock" th:field="*{criticalStock}"
+							class="form-control" />
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('criticalStock')}"
+							th:errors="*{criticalStock}"></div>
+					</div>
+
+					<div class="box-footer">
+						<input type="submit" value="Kaydet" class="btn btn-primary mt-2">
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

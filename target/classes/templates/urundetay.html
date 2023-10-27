@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::section})"> <!--layout(content)-->
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<section>
+		<hr>
+		<div>
+			<label>Ürün Adı:</label><label th:text="${urun.name}"></label>
+		</div>
+		<hr>
+		<div>
+			<label>Üretim Tarihi:</label><label th:text="${urun.productionDate}"></label>
+		</div>
+		<hr>
+		<div>
+			<label>Kategorisi:</label><label th:text="${urun.category.name}"></label>
+		</div>
+	</section>
+
+</body>
+
+</html>

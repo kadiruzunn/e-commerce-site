@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org" th:replace="_layout::layout(~{::section})">
+
+<head>
+	<title>Registration Title</title>
+</head>
+
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+					<div class="card-header">
+						<h1 class="text-center"> Create New User </h1>
+					</div>
+					<th:block th:if="${session.msg}">
+						<p class="text-center fs-3" th:text="#{email.var}"></p>
+						<th:block th:text"${#session.removeAttribute('msg')}"></th:block>
+					</th:block>
+					<div class="card-body">
+						<form th:action="@{/registration}" th:object="${user}" method="POST" class="form">
+							<div class="form-group">
+								<label> Ad </label>
+								<input type="text" name="firstName" th:field="*{firstName}"
+									class="form-control" placeholder="Enter First Name" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('firstName')}"
+									th:errors="*{firstName}">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label> Soyad </label>
+								<input type="text" name="lastName" th:field="*{lastName}" class="form-control"
+									placeholder="Enter Last Name" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('lastName')}"
+									th:errors="*{lastName}">
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<label> Email </label>
+								<input type="email" name="email" th:field="*{email}" class="form-control"
+									placeholder="Enter Email" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('email')}"
+									th:errors="*{email}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label> Mobile </label>
+								<input type="text" name="mobile" th:field="*{mobile}" class="form-control"
+									placeholder="Enter mobile" />
+								<div class="alert alert-danger" th:if="${#fields.hasErrors('mobile')}"
+									th:errors="*{mobile}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label> Password </label>
+								<input type="text" name="password" th:field="*{password}" class="form-control"
+									placeholder="Enter Password" />
+								<div class="alert alert-warning" th:if="${#fields.hasErrors('password')}"
+									th:errors="*{password}">
+								</div>
+							</div>
+
+							<div class="box-footer">
+								<input type="submit" value="Kaydet" class="btn btn-primary mt-3">
+							</div>
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>
